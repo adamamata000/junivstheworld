@@ -12,7 +12,7 @@ extends Node
 @export var maximum_spawn_limit = 1.5
 
 # Difficulty
-@export var difficulty_increase_every = 10.0
+@export var difficulty_increase_every = 5.0
 @export var spawn_time_reduction = 0.3
 
 # Current spawn timing

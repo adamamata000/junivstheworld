@@ -10,6 +10,7 @@ var health = 100
 
 # Combat
 @export var attack_damage = 10
+@export var powered_up_damage = 15
 @export var hit_stop_duration = 0.05
 
 # Hurt effects
@@ -25,6 +26,9 @@ var health = 100
 # Attack state
 var is_attacking = false
 var has_dealt_damage = false
+
+# Power-up state
+var is_powered_up = false
 
 # Death state
 var is_dead = false
@@ -120,6 +124,17 @@ func check_attack_damage():
 				break
 
 
+func power_up():
+	# Don't power up more than once
+	if is_powered_up:
+		return
+
+	is_powered_up = true
+	attack_damage = powered_up_damage
+
+	print("Juni powered up! Damage: ", attack_damage)
+
+
 func hit_stop():
 	Engine.time_scale = 0.0
 
@@ -145,7 +160,8 @@ func take_damage(amount):
 
 	# Flash Juni when she gets hit
 	hurt_flash()
-	
+
+	# Play damage sound
 	damage_sound.play()
 
 	if health <= 0:
