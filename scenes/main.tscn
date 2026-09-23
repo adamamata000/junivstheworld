@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://155xx7s6y6ta"]
+
+[ext_resource type="PackedScene" uid="uid://pxi20k5si7eb" path="res://scenes/juni.tscn" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://b3v08hfhl2av4" path="res://assets/images/background.png" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://m4eni5sm8c8b" path="res://scenes/cloud.tscn" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://bsxqsog23e4gg" path="res://scripts/cloud.gd" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://cpgegt130mevh" path="res://scripts/sunlight.gd" id="5_tbgi4"]
+[ext_resource type="AudioStream" uid="uid://cxlkwvgiy0ldh" path="res://assets/audio/juni_8bit.wav" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://fhcoudf3wwyn" path="res://assets/images/logo.png" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://briq0nidd4m8a" path="res://scenes/enemies/enemy1.tscn" id="8_tipki"]
+[ext_resource type="Script" uid="uid://b3cyxldotfxff" path="res://scripts/enemy_spawner.gd" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://bfx63njcggneo" path="res://scenes/enemies/enemy2.tscn" id="9_choun"]
+[ext_resource type="Script" uid="uid://dvrjnb3qvts8n" path="res://scripts/game_over_screen.gd" id="11_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://dih2ncly0j6vk" path="res://assets/images/gameover.png" id="11_ya4ey"]
+[ext_resource type="Script" uid="uid://kg1p52gr2p1g" path="res://scripts/score_ui.gd" id="13_trceg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srq52"]
+size = Vector2(1285, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7bi17"]
+size = Vector2(150, 734)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmvfc"]
+size = Vector2(12, 736)
+
+[node name="Node2D" type="Node2D" unique_id=919741294]
+
+[node name="Juni" parent="." unique_id=1055633807 instance=ExtResource("1_o5qli")]
+z_index = 10
+position = Vector2(634, 658)
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1537995604]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=2071222593]
+position = Vector2(642.5, 718.5)
+shape = SubResource("RectangleShape2D_srq52")
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=226366108]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1204899191]
+position = Vector2(65, 357)
+shape = SubResource("RectangleShape2D_7bi17")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1443310681]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=871632637]
+position = Vector2(1279, 358)
+shape = SubResource("RectangleShape2D_kmvfc")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1225539977]
+modulate = Color(0.8879926, 0.88799256, 0.8879925, 1)
+z_index = -10
+position = Vector2(640, 360)
+scale = Vector2(0.8036663, 0.8036663)
+texture = ExtResource("2_0wfyh")
+
+[node name="Cloud" parent="." unique_id=849844660 instance=ExtResource("3_sugp2")]
+z_index = -5
+position = Vector2(802, 45)
+script = ExtResource("4_jyhfs")
+
+[node name="Sunlight" type="ColorRect" parent="." unique_id=595757315]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(1, 0.6509804, 0.3882353, 0.039215688)
+script = ExtResource("5_tbgi4")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=1273322906]
+process_mode = 3
+stream = ExtResource("6_tefeu")
+autoplay = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=953527474]
+modulate = Color(0.89145625, 0.89145625, 0.8914562, 1)
+position = Vector2(160.00002, 107.00001)
+rotation = -0.64751714
+scale = Vector2(0.2058906, 0.2058906)
+texture = ExtResource("7_o6xl0")
+
+[node name="LeftSpawn" type="Marker2D" parent="." unique_id=251701607]
+position = Vector2(176, 704)
+
+[node name="RightSpawn" type="Marker2D" parent="." unique_id=1483998664]
+position = Vector2(1210, 694)
+
+[node name="EnemySpawner" type="Node" parent="." unique_id=367774114]
+script = ExtResource("9_85g3d")
+enemy_scenes = Array[PackedScene]([ExtResource("8_tipki"), ExtResource("9_choun")])
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawner" unique_id=1365614745]
+one_shot = true
+
+[node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1526814818]
+
+[node name="GameOverScreen" type="Control" parent="GameOverUI" unique_id=2004656485]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_eb6dy")
+
+[node name="DarkOverlay" type="ColorRect" parent="GameOverUI/GameOverScreen" unique_id=485397181]
+layout_mode = 0
+offset_right = 1292.0
+offset_bottom = 726.0
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="TextureRect" type="TextureRect" parent="GameOverUI/GameOverScreen" unique_id=473968392]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 178.0
+offset_right = 1140.0
+offset_bottom = 506.0
+texture = ExtResource("11_ya4ey")
+expand_mode = 1
+
+[node name="RestartButton" type="Button" parent="GameOverUI/GameOverScreen" unique_id=1408843985]
+layout_mode = 0
+offset_left = 563.0
+offset_top = 490.0
+offset_right = 706.0
+offset_bottom = 575.0
+text = "RESTART"
+
+[node name="ScoreUI" type="CanvasLayer" parent="." unique_id=635079901]
+script = ExtResource("13_trceg")
+
+[node name="ScoreLabel" type="Label" parent="ScoreUI" unique_id=1939538374]
+offset_left = 1209.0
+offset_top = 12.0
+offset_right = 1249.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="GameOverUI/GameOverScreen/RestartButton" to="GameOverUI/GameOverScreen" method="_on_restart_button_pressed"]
