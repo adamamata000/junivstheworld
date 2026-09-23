@@ -23,6 +23,7 @@ var health = 30
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var attack_hitbox = $AttackHitbox
 @onready var hit_impact = $HitImpact
+@onready var death_particles = $DeathParticles
 
 # Player
 var player
@@ -153,6 +154,9 @@ func die():
 	# Give Juni points for killing this enemy
 	var score_ui = get_tree().current_scene.get_node("ScoreUI")
 	score_ui.add_score(score_value)
+
+	# Particle burst
+	death_particles.emitting = true
 
 	animated_sprite.play("die")
 

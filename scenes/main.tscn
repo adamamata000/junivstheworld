@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://briq0nidd4m8a" path="res://scenes/enemies/enemy1.tscn" id="8_tipki"]
 [ext_resource type="Script" uid="uid://b3cyxldotfxff" path="res://scripts/enemy_spawner.gd" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://bfx63njcggneo" path="res://scenes/enemies/enemy2.tscn" id="9_choun"]
+[ext_resource type="PackedScene" uid="uid://bf24myphovxd7" path="res://scenes/enemies/enemy3.tscn" id="11_a8y0u"]
 [ext_resource type="Script" uid="uid://dvrjnb3qvts8n" path="res://scripts/game_over_screen.gd" id="11_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://dih2ncly0j6vk" path="res://assets/images/gameover.png" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://kg1p52gr2p1g" path="res://scripts/score_ui.gd" id="13_trceg"]
@@ -86,7 +87,7 @@ position = Vector2(1210, 694)
 
 [node name="EnemySpawner" type="Node" parent="." unique_id=367774114]
 script = ExtResource("9_85g3d")
-enemy_scenes = Array[PackedScene]([ExtResource("8_tipki"), ExtResource("9_choun")])
+enemy_scenes = Array[PackedScene]([ExtResource("8_tipki"), ExtResource("9_choun"), ExtResource("11_a8y0u")])
 
 [node name="SpawnTimer" type="Timer" parent="EnemySpawner" unique_id=1365614745]
 one_shot = true

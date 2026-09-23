@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://fdivtwipbvda" path="res://assets/images/amaya.png" id="1_g6p5h"]
 [ext_resource type="Script" uid="uid://bh4i7ttu10poo" path="res://scripts/enemy1.gd" id="1_w6keq"]
 [ext_resource type="AudioStream" uid="uid://bdfaevtrprsq0" path="res://assets/audio/hit_impact.wav" id="3_8t2vn"]
+[ext_resource type="Texture2D" uid="uid://ix6c6jye6e4d" path="res://assets/images/particle.png" id="4_e2a2s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pr0jb"]
 atlas = ExtResource("1_g6p5h")
@@ -207,6 +208,14 @@ height = 202.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6p5h"]
 size = Vector2(123, 167)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e2a2s"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 76.945
+initial_velocity_min = 80.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 300, 0)
+
 [node name="enemy2" type="CharacterBody2D" unique_id=1307546667 groups=["enemies"]]
 script = ExtResource("1_w6keq")
 
@@ -228,5 +237,13 @@ shape = SubResource("RectangleShape2D_g6p5h")
 [node name="HitImpact" type="AudioStreamPlayer2D" parent="." unique_id=1687580820]
 stream = ExtResource("3_8t2vn")
 volume_db = -13.0
+
+[node name="DeathParticles" type="GPUParticles2D" parent="." unique_id=1720048906]
+emitting = false
+texture = ExtResource("4_e2a2s")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_e2a2s")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
