@@ -111,7 +111,7 @@ position = Vector2(391.11966, 619.75)
 scale = Vector2(1.2237355, 1.2237355)
 sprite_frames = SubResource("SpriteFrames_srq52")
 autoplay = "default"
-frame_progress = 0.05899319
+frame_progress = 0.3755258
 
 [node name="Maxi" type="AnimatedSprite2D" parent="." unique_id=318848703]
 modulate = Color(0.72464263, 0.7246426, 0.7246426, 1)

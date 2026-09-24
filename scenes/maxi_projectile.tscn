@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cevkfj4hfb6o6"]
+
+[ext_resource type="Script" uid="uid://dw56rgxrmhini" path="res://scripts/maxi_projectile.gd" id="1_e4k5x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_srq52"]
+radius = 28.442924
+
+[node name="MaxiProjectile" type="Area2D" unique_id=2077336003]
+script = ExtResource("1_e4k5x")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1691702939]
+offset_left = -20.0
+offset_top = -17.0
+offset_right = 20.0
+offset_bottom = 23.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1079986822]
+shape = SubResource("CircleShape2D_srq52")

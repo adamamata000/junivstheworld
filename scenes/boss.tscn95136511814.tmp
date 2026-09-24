@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://j4jksvwwpmka"]
+
+[ext_resource type="Texture2D" uid="uid://bars4t6oyj647" path="res://assets/images/bossfight_background.png" id="1_dlmty"]
+[ext_resource type="PackedScene" uid="uid://pxi20k5si7eb" path="res://scenes/juni.tscn" id="3_jncid"]
+[ext_resource type="PackedScene" uid="uid://my2od50t8kte" path="res://scenes/maxi.tscn" id="3_qnbj4"]
+[ext_resource type="PackedScene" uid="uid://cevkfj4hfb6o6" path="res://scenes/maxi_projectile.tscn" id="4_r3bxh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlmty"]
+size = Vector2(1285, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_neq0i"]
+size = Vector2(150, 734)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jncid"]
+size = Vector2(12, 736)
+
+[node name="Node2D" type="Node2D" unique_id=985547831]
+
+[node name="Background" type="TextureRect" parent="." unique_id=1889891544]
+modulate = Color(0.7919991, 0.79199916, 0.7919991, 1)
+offset_right = 1302.4187
+offset_bottom = 733.0
+texture = ExtResource("1_dlmty")
+expand_mode = 1
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=395175279]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=352777154]
+position = Vector2(642.5, 718.5)
+shape = SubResource("RectangleShape2D_dlmty")
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=339649699]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1627136020]
+position = Vector2(65, 357)
+shape = SubResource("RectangleShape2D_neq0i")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1062079222]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=231365839]
+position = Vector2(1279, 358)
+shape = SubResource("RectangleShape2D_jncid")
+
+[node name="Juni" parent="." unique_id=1055633807 instance=ExtResource("3_jncid")]
+z_index = 10
+position = Vector2(271, 655)
+
+[node name="Maxi" parent="." unique_id=840978722 instance=ExtResource("3_qnbj4")]
+position = Vector2(1091, 678)
+projectile_scene = ExtResource("4_r3bxh")
