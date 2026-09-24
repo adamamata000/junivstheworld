@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://e7mtqpdrqikg" path="res://scenes/enemies/enemy4.tscn" id="12_jkv2x"]
 [ext_resource type="Script" uid="uid://kg1p52gr2p1g" path="res://scripts/score_ui.gd" id="13_trceg"]
 [ext_resource type="PackedScene" uid="uid://dl7mp82tu4t1v" path="res://scenes/power_up.tscn" id="16_jbj1t"]
+[ext_resource type="FontFile" uid="uid://cntoqcnyd0y2q" path="res://assets/fonts/ARCADECLASSIC.TTF" id="19_0ld40"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srq52"]
 size = Vector2(1285, 1)
@@ -157,11 +158,12 @@ script = ExtResource("13_trceg")
 power_up_scene = ExtResource("16_jbj1t")
 
 [node name="ScoreLabel" type="Label" parent="ScoreUI" unique_id=1939538374]
-offset_left = 1209.0
-offset_top = 12.0
-offset_right = 1249.0
-offset_bottom = 81.0
-theme_override_font_sizes/font_size = 50
+offset_left = 1141.0
+offset_top = 18.0
+offset_right = 1196.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("19_0ld40")
+theme_override_font_sizes/font_size = 100
 text = "0"
 
 [node name="PowerUpSpawn" type="Marker2D" parent="." unique_id=2058489027]

@@ -2,6 +2,78 @@
 
 [ext_resource type="Script" uid="uid://cufhpwkm5hvks" path="res://scripts/boss_cutscene.gd" id="1_b2gv7"]
 [ext_resource type="Texture2D" uid="uid://bars4t6oyj647" path="res://assets/images/bossfight_background.png" id="2_w6hvi"]
+[ext_resource type="FontFile" uid="uid://cntoqcnyd0y2q" path="res://assets/fonts/ARCADECLASSIC.TTF" id="3_dqa0u"]
+[ext_resource type="AudioStream" uid="uid://diruoa8f8b7bx" path="res://assets/audio/cutscene.wav" id="3_sx0qy"]
+[ext_resource type="AudioStream" uid="uid://b5k3v37cxtwtq" path="res://assets/audio/8bit_next.wav" id="5_sgmps"]
+[ext_resource type="Texture2D" uid="uid://bkdhsa61pqx24" path="res://assets/images/boss_scene_juni.png" id="6_itrg8"]
+[ext_resource type="Texture2D" uid="uid://d33dt4tvqos7a" path="res://assets/images/boss_scene_maxi.png" id="7_mhnxx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5oxf"]
+atlas = ExtResource("6_itrg8")
+region = Rect2(676, 0, 305, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jspj2"]
+atlas = ExtResource("6_itrg8")
+region = Rect2(981, 0, 305, 257)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_srq52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5oxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jspj2")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oqps"]
+atlas = ExtResource("7_mhnxx")
+region = Rect2(0, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l475r"]
+atlas = ExtResource("7_mhnxx")
+region = Rect2(543, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bmb8"]
+atlas = ExtResource("7_mhnxx")
+region = Rect2(1086, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrb61"]
+atlas = ExtResource("7_mhnxx")
+region = Rect2(1629, 0, 543, 724)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7bi17"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oqps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l475r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bmb8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrb61")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgmps"]
+size = Vector2(1285, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itrg8"]
+size = Vector2(150, 734)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhnxx"]
+size = Vector2(12, 736)
 
 [node name="BossCutscene" type="Control" unique_id=527467335]
 layout_mode = 3
@@ -12,27 +84,89 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b2gv7")
 
+[node name="black" type="TextureRect" parent="." unique_id=1237350123]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="black" unique_id=1853320074]
+layout_mode = 0
+offset_right = 1334.0
+offset_bottom = 727.0
+color = Color(0, 0, 0, 1)
+
 [node name="Background" type="TextureRect" parent="." unique_id=842007128]
+modulate = Color(0.7919991, 0.79199916, 0.7919991, 1)
 layout_mode = 0
 offset_right = 1302.4187
 offset_bottom = 733.0
 texture = ExtResource("2_w6hvi")
 expand_mode = 1
 
+[node name="Juni" type="AnimatedSprite2D" parent="." unique_id=174853235]
+self_modulate = Color(0.83975405, 0.83975405, 0.839754, 1)
+texture_filter = 1
+position = Vector2(391.11966, 619.75)
+scale = Vector2(1.2237355, 1.2237355)
+sprite_frames = SubResource("SpriteFrames_srq52")
+autoplay = "default"
+frame_progress = 0.05899319
+
+[node name="Maxi" type="AnimatedSprite2D" parent="." unique_id=318848703]
+modulate = Color(0.72464263, 0.7246426, 0.7246426, 1)
+texture_filter = 1
+position = Vector2(790, 558)
+scale = Vector2(0.19852093, 0.19852096)
+sprite_frames = SubResource("SpriteFrames_7bi17")
+autoplay = "default"
+
 [node name="DialogueBox" type="Panel" parent="." unique_id=174602396]
 layout_mode = 0
-offset_left = 427.0
-offset_top = 550.0
-offset_right = 904.0
-offset_bottom = 659.0
+offset_left = 372.0
+offset_top = 615.0
+offset_right = 910.0
+offset_bottom = 692.1605
 
 [node name="SpeakerName" type="Label" parent="DialogueBox" unique_id=181074488]
 layout_mode = 0
-offset_right = 40.0
+offset_right = 115.0
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_dqa0u")
+theme_override_font_sizes/font_size = 20
 
 [node name="DialogueText" type="Label" parent="DialogueBox" unique_id=791849244]
 layout_mode = 0
-offset_top = 24.0
-offset_right = 40.0
-offset_bottom = 47.0
+offset_left = 2.0
+offset_top = 38.0
+offset_right = 268.0
+offset_bottom = 69.0
+theme_override_fonts/font = ExtResource("3_dqa0u")
+theme_override_font_sizes/font_size = 20
+
+[node name="Cutscene" type="AudioStreamPlayer2D" parent="." unique_id=730043625]
+stream = ExtResource("3_sx0qy")
+volume_db = 2.229
+autoplay = true
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1552798191]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=304235847]
+position = Vector2(642.5, 718.5)
+shape = SubResource("RectangleShape2D_sgmps")
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=1923441024]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=466026364]
+position = Vector2(65, 357)
+shape = SubResource("RectangleShape2D_itrg8")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1878355055]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=837620451]
+position = Vector2(1279, 358)
+shape = SubResource("RectangleShape2D_mhnxx")
+
+[node name="Next" type="AudioStreamPlayer2D" parent="." unique_id=350151888]
+stream = ExtResource("5_sgmps")
+volume_db = -8.543

@@ -2,6 +2,7 @@ extends Control
 
 @onready var speaker_name = $DialogueBox/SpeakerName
 @onready var dialogue_text = $DialogueBox/DialogueText
+@onready var next_sound = $Next
 
 # Dialogue settings
 @export var typing_speed = 0.04
@@ -48,6 +49,7 @@ func _unhandled_input(event):
 		
 		# Otherwise go to next line
 		else:
+			next_sound.play()
 			next_line()
 
 
