@@ -3,12 +3,14 @@ extends Control
 @onready var speaker_name = $DialogueBox/SpeakerName
 @onready var dialogue_text = $DialogueBox/DialogueText
 @onready var next_sound = $Next
+@onready var transition_ui = $TransitionUI
 
 # Dialogue settings
 @export var typing_speed = 0.04
 
 var current_line = 0
 var is_typing = false
+var cutscene_finished = false
 
 var dialogue = [
 	{
@@ -40,13 +42,17 @@ func _ready():
 
 
 func _unhandled_input(event):
+	# Don't allow more input once transition has started
+	if cutscene_finished:
+		return
+
 	if event.is_action_pressed("attack"):
-		
+
 		# If text is still typing, finish it instantly
 		if is_typing:
 			dialogue_text.visible_ratio = 1.0
 			is_typing = false
-		
+
 		# Otherwise go to next line
 		else:
 			next_sound.play()
@@ -72,7 +78,7 @@ func type_text():
 	var total_characters = dialogue_text.text.length()
 
 	for i in range(total_characters + 1):
-		
+
 		# Stop if player skipped the animation
 		if not is_typing:
 			return
@@ -95,5 +101,11 @@ func next_line():
 
 
 func start_boss_fight():
+	if cutscene_finished:
+		return
+
+	cutscene_finished = true
+
 	Engine.time_scale = 1.0
-	get_tree().change_scene_to_file("res://boss_fight.tscn")
+
+	transition_ui.start_boss_fight_transition()

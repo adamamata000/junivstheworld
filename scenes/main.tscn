@@ -129,6 +129,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_eb6dy")
+main_game_scene = "uid://155xx7s6y6ta"
 
 [node name="DarkOverlay" type="ColorRect" parent="GameOverUI/GameOverScreen" unique_id=485397181]
 layout_mode = 0

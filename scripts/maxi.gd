@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 @export var projectile_scene: PackedScene
-@export var minimum_throw_time = 1.5
-@export var maximum_throw_time = 3.0
+@export var minimum_throw_time = 0.2
+@export var maximum_throw_time = 0.5
 
 @export var idle_scale = Vector2(1.0, 1.0)
 @export var attack_scale = Vector2(1.3, 1.3)

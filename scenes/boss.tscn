@@ -4,6 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://pxi20k5si7eb" path="res://scenes/juni.tscn" id="3_jncid"]
 [ext_resource type="PackedScene" uid="uid://my2od50t8kte" path="res://scenes/maxi.tscn" id="3_qnbj4"]
 [ext_resource type="PackedScene" uid="uid://cevkfj4hfb6o6" path="res://scenes/maxi_projectile.tscn" id="4_r3bxh"]
+[ext_resource type="Script" uid="uid://b3cyxldotfxff" path="res://scripts/enemy_spawner.gd" id="5_2avx2"]
+[ext_resource type="PackedScene" uid="uid://briq0nidd4m8a" path="res://scenes/enemies/enemy1.tscn" id="6_5f346"]
+[ext_resource type="PackedScene" uid="uid://bfx63njcggneo" path="res://scenes/enemies/enemy2.tscn" id="7_0onds"]
+[ext_resource type="PackedScene" uid="uid://bf24myphovxd7" path="res://scenes/enemies/enemy3.tscn" id="8_lfs1x"]
+[ext_resource type="PackedScene" uid="uid://e7mtqpdrqikg" path="res://scenes/enemies/enemy4.tscn" id="9_8eiau"]
+[ext_resource type="Script" uid="uid://dvrjnb3qvts8n" path="res://scripts/game_over_screen.gd" id="10_vn2fc"]
+[ext_resource type="Texture2D" uid="uid://dih2ncly0j6vk" path="res://assets/images/gameover.png" id="11_gqd3i"]
+[ext_resource type="Script" uid="uid://kg1p52gr2p1g" path="res://scripts/score_ui.gd" id="12_mautr"]
+[ext_resource type="PackedScene" uid="uid://dl7mp82tu4t1v" path="res://scenes/power_up.tscn" id="13_ho3mf"]
+[ext_resource type="FontFile" uid="uid://cntoqcnyd0y2q" path="res://assets/fonts/ARCADECLASSIC.TTF" id="14_7apjh"]
+[ext_resource type="AudioStream" uid="uid://b16kdsklk8as2" path="res://assets/audio/boss_fight.wav" id="15_gqd3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlmty"]
 size = Vector2(1285, 1)
@@ -51,3 +62,74 @@ position = Vector2(786, 457)
 projectile_scene = ExtResource("4_r3bxh")
 idle_scale = Vector2(0.18, 0.18)
 attack_scale = Vector2(0.27, 0.27)
+
+[node name="EnemySpawner" type="Node" parent="." unique_id=975866449]
+script = ExtResource("5_2avx2")
+enemy_scenes = Array[PackedScene]([ExtResource("6_5f346"), ExtResource("7_0onds"), ExtResource("8_lfs1x"), ExtResource("9_8eiau")])
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawner" unique_id=1179300728]
+one_shot = true
+
+[node name="LeftSpawn" type="Marker2D" parent="." unique_id=2113641822]
+position = Vector2(176, 704)
+
+[node name="RightSpawn" type="Marker2D" parent="." unique_id=583084528]
+position = Vector2(1210, 694)
+
+[node name="GameOverUI" type="CanvasLayer" parent="." unique_id=360558912]
+
+[node name="GameOverScreen" type="Control" parent="GameOverUI" unique_id=337928058]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_vn2fc")
+main_game_scene = "uid://155xx7s6y6ta"
+
+[node name="DarkOverlay" type="ColorRect" parent="GameOverUI/GameOverScreen" unique_id=261676271]
+layout_mode = 0
+offset_right = 1292.0
+offset_bottom = 726.0
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="TextureRect" type="TextureRect" parent="GameOverUI/GameOverScreen" unique_id=311957447]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 178.0
+offset_right = 1140.0
+offset_bottom = 506.0
+texture = ExtResource("11_gqd3i")
+expand_mode = 1
+
+[node name="RestartButton" type="Button" parent="GameOverUI/GameOverScreen" unique_id=1261318863]
+layout_mode = 0
+offset_left = 563.0
+offset_top = 490.0
+offset_right = 706.0
+offset_bottom = 575.0
+text = "RESTART"
+
+[node name="ScoreUI" type="CanvasLayer" parent="." unique_id=2050853401]
+script = ExtResource("12_mautr")
+starting_score = 30
+power_up_scene = ExtResource("13_ho3mf")
+
+[node name="ScoreLabel" type="Label" parent="ScoreUI" unique_id=1644398954]
+offset_left = 1141.0
+offset_top = 18.0
+offset_right = 1196.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("14_7apjh")
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=32183091]
+stream = ExtResource("15_gqd3i")
+autoplay = true
+
+[connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="GameOverUI/GameOverScreen/RestartButton" to="GameOverUI/GameOverScreen" method="_on_restart_button_pressed"]
