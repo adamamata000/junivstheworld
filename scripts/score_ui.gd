@@ -8,6 +8,7 @@ var score = 0
 
 var power_up_spawned = false
 
+var boss_cutscene_started = false
 
 func _ready():
 	update_score()
@@ -17,9 +18,18 @@ func add_score(amount):
 	score += amount
 	update_score()
 
-	# Spawn the power-up once when we reach 20
+	# Power-up at 20
 	if score >= 20 and not power_up_spawned:
 		spawn_power_up()
+
+	# Cutscene at 30
+	if score >= 30 and not boss_cutscene_started:
+		boss_cutscene_started = true
+		start_boss_cutscene()
+		
+func start_boss_cutscene():
+	var transition_ui = get_tree().current_scene.get_node("TransitionUI")
+	transition_ui.start_boss_transition()
 
 
 func update_score():

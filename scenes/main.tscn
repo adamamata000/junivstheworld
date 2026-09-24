@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://155xx7s6y6ta"]
 
+[ext_resource type="Script" uid="uid://dwvsp1iqmghpl" path="res://scripts/transition_ui.gd" id="1_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://bmar4t4qj7e2n" path="res://assets/audio/thunder.wav" id="1_muem4"]
 [ext_resource type="PackedScene" uid="uid://pxi20k5si7eb" path="res://scenes/juni.tscn" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://b3v08hfhl2av4" path="res://assets/images/background.png" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://m4eni5sm8c8b" path="res://scenes/cloud.tscn" id="3_sugp2"]
@@ -27,6 +29,26 @@ size = Vector2(150, 734)
 size = Vector2(12, 736)
 
 [node name="Node2D" type="Node2D" unique_id=919741294]
+
+[node name="TransitionUI" type="CanvasLayer" parent="." unique_id=1465641661]
+script = ExtResource("1_dp3eg")
+
+[node name="BlackBackground" type="ColorRect" parent="TransitionUI" unique_id=2086423826]
+visible = false
+offset_right = 1306.0
+offset_bottom = 727.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Flash" type="ColorRect" parent="TransitionUI" unique_id=21460790]
+visible = false
+offset_right = 1287.0
+offset_bottom = 733.0
+mouse_filter = 2
+
+[node name="ThunderSound" type="AudioStreamPlayer2D" parent="TransitionUI" unique_id=514110661]
+stream = ExtResource("1_muem4")
+volume_db = -4.086
 
 [node name="Juni" parent="." unique_id=1055633807 instance=ExtResource("1_o5qli")]
 z_index = 10

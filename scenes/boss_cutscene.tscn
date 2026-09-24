@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bbhlhtd5bcrh0"]
+
+[ext_resource type="Script" uid="uid://cufhpwkm5hvks" path="res://scripts/boss_cutscene.gd" id="1_b2gv7"]
+[ext_resource type="Texture2D" uid="uid://bars4t6oyj647" path="res://assets/images/bossfight_background.png" id="2_w6hvi"]
+
+[node name="BossCutscene" type="Control" unique_id=527467335]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b2gv7")
+
+[node name="Background" type="TextureRect" parent="." unique_id=842007128]
+layout_mode = 0
+offset_right = 1302.4187
+offset_bottom = 733.0
+texture = ExtResource("2_w6hvi")
+expand_mode = 1
+
+[node name="DialogueBox" type="Panel" parent="." unique_id=174602396]
+layout_mode = 0
+offset_left = 427.0
+offset_top = 550.0
+offset_right = 904.0
+offset_bottom = 659.0
+
+[node name="SpeakerName" type="Label" parent="DialogueBox" unique_id=181074488]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="DialogueText" type="Label" parent="DialogueBox" unique_id=791849244]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 40.0
+offset_bottom = 47.0

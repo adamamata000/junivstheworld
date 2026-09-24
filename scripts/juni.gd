@@ -110,16 +110,18 @@ func check_attack_damage():
 					body.global_position.x - global_position.x
 				)
 
+				# Mark this attack as having connected
+				has_dealt_damage = true
+
+				# Start hit-stop BEFORE damaging the enemy
+				# because killing the enemy may trigger a scene change
+				hit_stop()
+
 				# Damage enemy
 				body.take_damage(
 					attack_damage,
 					knockback_direction
 				)
-
-				has_dealt_damage = true
-
-				# Brief freeze when hit connects
-				hit_stop()
 
 				break
 
@@ -136,15 +138,25 @@ func power_up():
 
 
 func hit_stop():
+	# Save a reference to the SceneTree
+	var tree = get_tree()
+
+	# Juni may have been removed during a scene change
+	if tree == null:
+		return
+
+	# Freeze the game very briefly
 	Engine.time_scale = 0.0
 
-	await get_tree().create_timer(
+	await tree.create_timer(
 		hit_stop_duration,
 		true,
 		false,
 		true
 	).timeout
 
+	# Juni may have disappeared while we were waiting,
+	# but Engine still exists, so always restore time
 	Engine.time_scale = 1.0
 
 
@@ -172,11 +184,16 @@ func hurt_flash():
 	# Flash bright white
 	animated_sprite.modulate = Color(3, 3, 3, 1)
 
-	# Wait briefly
-	await get_tree().create_timer(hurt_flash_duration).timeout
+	var tree = get_tree()
 
-	# Return to normal
-	animated_sprite.modulate = Color.WHITE
+	if tree == null:
+		return
+
+	await tree.create_timer(hurt_flash_duration).timeout
+
+	# Make sure Juni still exists before changing her sprite
+	if is_instance_valid(animated_sprite):
+		animated_sprite.modulate = Color.WHITE
 
 
 func update_health_bar():
